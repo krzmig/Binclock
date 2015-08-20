@@ -1,7 +1,9 @@
 # Binclock
 It's my very first "project" in C++ so feel free to say me that i made thousands of stupid things in code.
 I don't like simple programs with big libraries included to make something in 5 lines than 10, so this one using only standard C++ libraries.
+
 I made it because I wanted something to display binary clock in Conky, but I didn't found nothing special, so I decided to make it by myself. In other hand I wanted to increase my C++ level from -1 to 1 in 1-100 scale, so I dropped this project in PHP, and started from 0 in C++. This is end of this boring story.
+
 Oh, and sorry for my english.
 ## Requirements
 * Unix system
@@ -31,7 +33,7 @@ run `binclock --help` to get this help message (i know, i'm lazy):
   --noseconds        - Don't show seconds.
   --12hours          - Show clock in 12h mode, default is 24h mode (not working with --hex option).
   --hex              - Show clock for Hexadecimal time (16h, 256m, 16s).
-                       See: https://en.wikipedia.org/wiki/Hexadecimal_time\n
+                       See: https://en.wikipedia.org/wiki/Hexadecimal_time
   --help             - Show this help.
 ```
 ## Todo
