@@ -48,7 +48,7 @@ class binaryClock
 		binaryClock();
 		void run();
 		void help();
-		void checkParam( char *, char * );
+		bool checkParam( char *, char * );
 	
 	protected:
 		void setCurrentTime();
@@ -472,7 +472,10 @@ void binaryClock::genNullChar()
 {
 	for( int i = 0; i < this -> utf8_strlen( this -> true_char ); i++ )
 	{
-		this -> null_char += ' ';
+		if( i == 0 )
+			this -> null_char = ' ';
+		else
+			this -> null_char += ' ';
 	}
 }
 
@@ -481,11 +484,12 @@ void binaryClock::genNullChar()
  *
  * @param char* param - Param name to set.
  * @param char* next_param - Next param, example needed for setting true/false string.
+ * @return bool - true if next param is used
  *
  * @version 1.0 [19.08.2015]
  * @author krzmig
  */
-void binaryClock::checkParam( char *param, char *next_param )
+bool binaryClock::checkParam( char *param, char *next_param )
 {
 	if( strcmp( param, "--help" ) == 0 )
 		this -> help();
@@ -503,24 +507,27 @@ void binaryClock::checkParam( char *param, char *next_param )
 		this -> hex_time = true;
 	else if( strcmp( param, "--12hours" ) == 0 )
 	{
-		this -> twelve_hours = true;	
+		this -> twelve_hours = true;
 		this -> bitTimeNulls[0] = 2;
 	}
 	else if( strcmp( param, "--truechar" ) == 0 )
 	{
 		this -> true_char = next_param;
 		this -> genNullChar();
+		return true;
 	}
 	else if( strcmp( param, "--falsechar" ) == 0 )
 	{
 		this -> false_char = next_param;
 		this -> genNullChar();
+		return true;
 	}
 	else
 	{
 		cout << "Unknow parametr " << param << "\n\n";
 		this -> help();
 	}
+	return false;
 }
 
 /**
@@ -568,7 +575,10 @@ int main( int argc, char* argv[] )
 	for( int i = 1; i < argc; i++ )
 	{
 		if( i + 1 < argc )
-			bc -> checkParam( argv[i], argv[i+1] );
+		{
+			if( bc -> checkParam( argv[i], argv[i+1] ) )
+				i = i + 1;
+		}
 		else
 			bc -> checkParam( argv[i], (char *)"" );
 	}
